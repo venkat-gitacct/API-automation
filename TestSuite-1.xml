@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testSuite id="86a5009a-7cc6-42d0-a724-414d0d791266" name="TestSuite 1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="8939b751-b886-4a1e-88ef-19da27ac6b86" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="request" id="5ca2f186-12eb-4a96-a5cf-9213a153e206" name="Add - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CalculatorSoap12</con:interface><con:operation>Add</con:operation><con:request name="Add - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="7dabbf31-e3ca-4a94-9c5d-cfcf3c6f5ae5"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://www.dneonline.com/calculator.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">
+   <soap:Header/>
+   <soap:Body>
+      <tem:Add>
+         <tem:intA>2</tem:intA>
+         <tem:intB>2</tem:intB>
+      </tem:Add>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:assertion type="SOAP Response" id="db596867-bb26-46a3-9c3f-0cf6c3f68a16" name="SOAP Response"/><con:assertion type="XPath Match" id="19aba982-b3e0-493c-8b36-00d6e3920f71" name="Match content of [AddResult]"><con:configuration><path>declare namespace ns1='http://tempuri.org/';
+//ns1:AddResponse[1]/ns1:AddResult[1]/text()</path><content>4</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="fe15ed22-2096-4190-87da-c6f7364ef1a4" name="Match content of [AddResult] using RegEx"><con:configuration><path>declare namespace ns1='http://tempuri.org/';
+matches( //ns1:AddResponse[1]/ns1:AddResult[1]/text(), '4' )</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="f6294bbb-5bad-40f7-811d-40de56e3f19d" name="Assert node [AddResult]"><con:configuration><scriptText>import com.eviware.soapui.support.XmlHolder
+
+def holder = new XmlHolder( messageExchange.responseContentAsXml )
+holder.namespaces["ns1"] = "http://tempuri.org/"
+def node = holder.getDomNode( "//ns1:AddResponse[1]/ns1:AddResult[1]" )
+
+assert node != null
+</scriptText></con:configuration></con:assertion><con:assertion type="XPath Match" id="86c13095-8194-4791-980d-a2ad29c241d2" name="Check for existence of [AddResult]"><con:configuration><path>declare namespace ns1='http://tempuri.org/';
+exists( //ns1:AddResponse/ns1:AddResult)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="f689a0de-8097-4027-bf95-162025116069" name="Assert node [AddResult]"><con:configuration><scriptText>import com.eviware.soapui.support.XmlHolder
+
+def holder = new XmlHolder( messageExchange.responseContentAsXml )
+holder.namespaces["ns1"] = "http://tempuri.org/"
+def node = holder.getDomNode( "//ns1:AddResponse[1]/ns1:AddResult[1]" )
+
+assert node != null
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tempuri.org/CalculatorSoap/AddRequest"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="PropertyTransfer 1" id="9cba4e22-3dfb-4c26-80de-ce7984988eec"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" transferToAll="false" entitize="false"><con:name>AddResult</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>Add - Request 1</con:sourceStep><con:sourcePath>declare namespace ns1='http://tempuri.org/';
+//ns1:AddResponse[1]/ns1:AddResult[1]</con:sourcePath><con:targetType>AddResult</con:targetType><con:targetStep>Properties 1</con:targetStep><con:targetPath/><con:type>XPATH</con:type><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="properties" name="Properties 1" id="b7432307-6e5d-4867-8cc2-005ab861951c"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>AddResult</con:name><con:value>4</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="assertionteststep" name="Assertion TestStep" id="850a7a58-b9ce-4f64-8923-4fc8b54c853e"><con:settings/><con:config xsi:type="con:AssertionTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></con:testStep><con:properties/><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite>
